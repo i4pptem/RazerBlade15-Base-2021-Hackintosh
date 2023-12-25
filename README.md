@@ -35,7 +35,7 @@ I added "-v debug=0x100 keepsyms=1" BootArgs, to debug, after installation you c
 | Storage          | Samsung SSD 970 EVO Plus 1TB | No Issues |
 | TouchPad         | Precision Glass | No Issues |
 | Webcam           | HD webcam (1MP / 720P) | No Issues |
-| Keyboard         | RGB Razer Chroma Backlit | No Issues, can't config color, no software |
+| Keyboard         | RGB Razer Chroma Backlit | No Issues, fork to change color |
 | Port             | USB 3.1 | No Issues |
 |                  | Thunderbolt 3 (USB-C) | No Issues, display connection not tested |
 |                  | HDMI | Not working, dGPU connection |
@@ -98,7 +98,14 @@ To enable native HiDPI settings in the Display Preferences of macOS, download an
 * Enable ``Manipulate LED`` for ``Razer Blade (Razer)`` in ``Devices`` section
 
 ## Configuring the RGB of the keyboard
-You can try config your keyboard backlight by [Razer macOS](https://github.com/1kc/razer-macos) utility, in my case this is not recognize my keyboard.
+There is a fork for [Razer macOS](https://github.com/1kc/razer-macos), and little guide to it.
+
+* Clone Repo [librazermacos](https://github.com/sbresin/librazermacos/tree/feat/add-blade15-early-2021)
+* Open ``./src/sample_cli.c`` in any code editor
+* Change 16 Line ``device.productId == ******`` to ``0x026F``, You can find this adress in [Karabiner-Elements](https://pqrs.org/osx/karabiner/)
+* Change 19 Line to ``razer_attr_write_mode_static(device.usbDevice, "255", 3)``, where 255 is your HUE value, 255 means White
+* Save and execute ``make`` in temrinal
+* Execute ``sudo ./sample_cli``
 
 ## Related repositories
 * https://github.com/Japerz12138/RazerBladeAdvanced2020_Hackintosh
